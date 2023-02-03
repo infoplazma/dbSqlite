@@ -1,0 +1,28 @@
+create table user(
+    id integer PRIMARY KEY AUTOINCREMENT,
+    created datetime,
+    from_user_id integer,
+    session_id varchar(56));
+
+create table complaint(
+    id integer PRIMARY KEY AUTOINCREMENT,
+    name varchar(255),
+    user_id integer NOT NULL,
+    FOREIGN KEY(user_id) REFERENCES user(id) ON DELETE CASCADE);
+
+create table conclusion(
+    id integer PRIMARY KEY AUTOINCREMENT,
+    diagnosis varchar(255),
+    diagnosis_proba real,
+    conclusion varchar(255),
+    conclusion_proba real,
+    is_true_predicted boolean,
+    user_id integer NOT NULL,
+    FOREIGN KEY(user_id) REFERENCES user(id) ON DELETE CASCADE);
+
+create table symptom(
+    id integer PRIMARY KEY AUTOINCREMENT,
+    name varchar(255),
+    value varchar(255),
+    user_id integer NOT NULL,
+    FOREIGN KEY(user_id) REFERENCES user(id) ON DELETE CASCADE);
